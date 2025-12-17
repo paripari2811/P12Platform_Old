@@ -1,6 +1,7 @@
 import { CollabListDialog } from '@/components/dialog/CollabListDialog';
 import PowerLevelBanner from '@/components/pl/PowerLevelBanner';
 import GamerRanking from '@/components/ranking/Gamer';
+import ERC1155Test from '@/components/test/ERC1155Test';
 import { EventCategory, EventName } from '@/constants/event';
 import { useThemeAsset } from '@/hooks/theme';
 import { collabListModalAtom } from '@/store/collab/state';
@@ -48,6 +49,7 @@ export default function Home() {
       {/* <div className="mt-5 w-full">
         <PowerLevelBanner />
       </div> */}
+      <ERC1155Test />
       <div className="mt-4">
         <GamerRanking />
       </div>

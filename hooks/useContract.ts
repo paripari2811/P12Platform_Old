@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { Abi, WalletClient } from 'viem';
 import { getContract } from '../utils/getContract';
-import { babtABI, collabABI } from '../abis';
+import { babtABI, collabABI, erc1155ABI } from '../abis';
 import { Address, useContractRead, useNetwork, usePublicClient, useWalletClient } from 'wagmi';
 import { BABT_ADDRESSES, COLLAB_ADDRESS } from '../constants/addresses';
 
@@ -40,4 +40,26 @@ export function useBABTBalanceOf({ address }: { address?: Address }) {
 
 export function useCollabContract() {
   return useContract(COLLAB_ADDRESS, collabABI);
+}
+
+export function useERC1155Contract(contractAddress?: Address) {
+  return useContract(contractAddress, erc1155ABI);
+}
+
+export function useERC1155BalanceOfBatch({
+  contractAddress,
+  accounts,
+  tokenIds,
+}: {
+  contractAddress?: Address;
+  accounts?: Address[];
+  tokenIds?: bigint[];
+}) {
+  return useContractRead({
+    address: contractAddress,
+    abi: erc1155ABI,
+    functionName: 'balanceOfBatch',
+    args: accounts && tokenIds ? [accounts, tokenIds] : undefined,
+    enabled: !!contractAddress && !!accounts?.length && !!tokenIds?.length && accounts.length === tokenIds.length,
+  });
 }

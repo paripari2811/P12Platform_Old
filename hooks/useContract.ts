@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { Abi, WalletClient } from 'viem';
 import { getContract } from '../utils/getContract';
 import { babtABI, collabABI, erc1155ABI } from '../abis';
-import { Address, useContractRead, useContractReads, useNetwork, usePublicClient, useWalletClient } from 'wagmi';
+import { Address, useContractRead, useNetwork, usePublicClient, useWalletClient } from 'wagmi';
 import { BABT_ADDRESSES, COLLAB_ADDRESS } from '../constants/addresses';
 
 export function useContract<TAbi extends Abi>(address?: Address, abi?: TAbi, chainId?: number) {

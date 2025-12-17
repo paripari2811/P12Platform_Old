@@ -46,24 +46,6 @@ export function useERC1155Contract(contractAddress?: Address) {
   return useContract(contractAddress, erc1155ABI);
 }
 
-export function useERC1155BalanceOf({
-  contractAddress,
-  account,
-  tokenId,
-}: {
-  contractAddress?: Address;
-  account?: Address;
-  tokenId?: bigint;
-}) {
-  return useContractRead({
-    address: contractAddress,
-    abi: erc1155ABI,
-    functionName: 'balanceOf',
-    args: account && tokenId !== undefined ? [account, tokenId] : undefined,
-    enabled: !!contractAddress && !!account && tokenId !== undefined,
-  });
-}
-
 export function useERC1155BalanceOfBatch({
   contractAddress,
   accounts,
@@ -79,39 +61,5 @@ export function useERC1155BalanceOfBatch({
     functionName: 'balanceOfBatch',
     args: accounts && tokenIds ? [accounts, tokenIds] : undefined,
     enabled: !!contractAddress && !!accounts?.length && !!tokenIds?.length && accounts.length === tokenIds.length,
-  });
-}
-
-export function useERC1155Uri({
-  contractAddress,
-  tokenId,
-}: {
-  contractAddress?: Address;
-  tokenId?: bigint;
-}) {
-  return useContractRead({
-    address: contractAddress,
-    abi: erc1155ABI,
-    functionName: 'uri',
-    args: tokenId !== undefined ? [tokenId] : undefined,
-    enabled: !!contractAddress && tokenId !== undefined,
-  });
-}
-
-export function useERC1155IsApprovedForAll({
-  contractAddress,
-  account,
-  operator,
-}: {
-  contractAddress?: Address;
-  account?: Address;
-  operator?: Address;
-}) {
-  return useContractRead({
-    address: contractAddress,
-    abi: erc1155ABI,
-    functionName: 'isApprovedForAll',
-    args: account && operator ? [account, operator] : undefined,
-    enabled: !!contractAddress && !!account && !!operator,
   });
 }
